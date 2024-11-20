@@ -226,6 +226,12 @@ def print_table(data):
                 tab.add_rows(meh)
     print(tab)
 
+def update_services_list_with_new_entry(service, rss_data):
+    service["Date"] = normalize_date(rss_data.published_parsed)
+    service["Time"] = normalize_time(rss_data.published_parsed)
+    service["Summary"] = rss_data.title
+    service["Link"] = rss_data.link
+
 # Todo - a lot of code duplication need to clean up
 # Todo - add try catches
 def update(url, fuzz):
@@ -237,52 +243,34 @@ def update(url, fuzz):
                 name = y.get("Name")
                 if name in entry.title:
                     if is_newer(y.get("Date"), normalize_date(entry.published_parsed)):
-                        y["Date"] = normalize_date(entry.published_parsed)
-                        y["Time"] = normalize_time(entry.published_parsed)
-                        y["Summary"] = entry.title
-                        y["Link"] = entry.link
+                        update_services_list_with_new_entry(y, entry)
                 elif (int(fuzz) == 2) or (int(fuzz) == 3):
                     if type(y["Tag"]) == list:
                         for tag in y["Tag"]:
                             if tag in entry.title:
                                 if is_newer(y.get("Date"), normalize_date(entry.published_parsed)):
-                                    y["Date"] = normalize_date(entry.published_parsed)
-                                    y["Time"] = normalize_time(entry.published_parsed)
-                                    y["Summary"] = entry.title
-                                    y["Link"] = entry.link
+                                    update_services_list_with_new_entry(y, entry)
                     else:
                         if y["Tag"] in entry.title:
                             if is_newer(y.get("Date"), normalize_date(entry.published_parsed)):
-                                y["Date"] = normalize_date(entry.published_parsed)
-                                y["Time"] = normalize_time(entry.published_parsed)
-                                y["Summary"] = entry.title
-                                y["Link"] = entry.link
+                                update_services_list_with_new_entry(y, entry)
                 else:
                     continue
 
                 if int(fuzz) == 3:
                     if name in entry.summary:
                         if is_newer(y.get("Date"), normalize_date(entry.published_parsed)):
-                            y["Date"] = normalize_date(entry.published_parsed)
-                            y["Time"] = normalize_time(entry.published_parsed)
-                            y["Summary"] = entry.title
-                            y["Link"] = entry.link
-                        else:
-                            if type(y["Tag"]) == list:
-                                for tag in y["Tag"]:
-                                    if tag in entry.summary:
-                                        if is_newer(y.get("Date"), normalize_date(entry.published_parsed)):
-                                            y["Date"] = normalize_date(entry.published_parsed)
-                                            y["Time"] = normalize_time(entry.published_parsed)
-                                            y["Summary"] = entry.title
-                                            y["Link"] = entry.link
-                            else:
-                                if y["Tag"] in entry.summary:
+                            update_services_list_with_new_entry(y, entry)
+                    else:
+                        if type(y["Tag"]) == list:
+                            for tag in y["Tag"]:
+                                if tag in entry.summary:
                                     if is_newer(y.get("Date"), normalize_date(entry.published_parsed)):
-                                        y["Date"] = normalize_date(entry.published_parsed)
-                                        y["Time"] = normalize_time(entry.published_parsed)
-                                        y["Summary"] = entry.title
-                                        y["Link"] = entry.link
+                                        update_services_list_with_new_entry(y, entry)
+                        else:
+                            if y["Tag"] in entry.summary:
+                                if is_newer(y.get("Date"), normalize_date(entry.published_parsed)):
+                                    update_services_list_with_new_entry(y, entry)
 
 def write_output(services_list):
 

@@ -45,7 +45,7 @@
       {"Name": "Amazon API Gateway", "Tag": "API Gateway", "Date": "01-01-1970", "Time": "NA/NA","Summary": "NO DATA","Link": "NO DATA"},
       {"Name": "Amazon Cloudfront", "Tag": "Cloudfront", "Date": "01-01-1970", "Time": "NA/NA", "Summary": "NO DATA","Link": "NO DATA"},
       {"Name": "Amazon Route53", "Tag": "Route53", "Date": "01-01-1970", "Time": "NA/NA","Summary": "NO DATA","Link": "NO DATA"},
-      {"Name": "Amazon VPC", "Tag": "VPC", "Date": "01-01-1970", "Time": "NA/NA","Summary": "NO DATA","Link": "NO DATA"},
+      {"Name": "Amazon Virtual Private Cloud", "Tag": "VPC", "Date": "01-01-1970", "Time": "NA/NA","Summary": "NO DATA","Link": "NO DATA"},
       {"Name": "AWS App Mesh", "Tag": "App Mesh", "Date": "01-01-1970", "Time": "NA/NA","Summary": "NO DATA","Link": "NO DATA"},
       {"Name": "AWS Cloud Map", "Tag": "Cloud Map", "Date": "01-01-1970", "Time": "NA/NA","Summary": "NO DATA","Link": "NO DATA"},
       {"Name": "AWS Direct Connect", "Tag": "Direct Connect", "Date": "01-01-1970", "Time": "NA/NA","Summary": "NO DATA","Link": "NO DATA"},
